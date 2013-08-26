@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:cxf="http://cxf.apache.org/core" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
-    xmlns:httpj="http://cxf.apache.org/transports/http-jetty/configuration"
+    xmlns:cxf="http://cxf.apache.org/core"
+    xmlns:context="http://www.springframework.org/schema/context"
     xsi:schemaLocation="
     http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
     http://cxf.apache.org/core
-    http://cxf.apache.org/schemas/core.xsd
-    http://cxf.apache.org/jaxrs
-    http://cxf.apache.org/schemas/jaxrs.xsd
-    http://cxf.apache.org/transports/http-jetty/configuration 
-    http://cxf.apache.org/schemas/configuration/http-jetty.xsd">
+    http://cxf.apache.org/schemas/core.xsd">
+
+    <context:component-scan base-package="com.kaz3t.proto" />
 
     <import resource="classpath:META-INF/cxf/cxf.xml" />
 
@@ -22,9 +22,14 @@
 
     <bean id="jaxRsFactory" class="org.apache.cxf.jaxrs.JAXRSServerFactoryBean" init-method="create">
         <property name="address" value="http://localhost:7777" />
-        <property name="serviceBean" ref="helloRestService" />
+        <property name="serviceBeans">
+            <list>
+                <ref bean="helloRestService" />
+                <ref bean="byeRestService" />
+            </list>
+        </property>
     </bean>
 
-    <bean id="helloRestService" class="com.kaz3t.proto.HelloRestService" />
+<!--     <bean id="helloRestService" class="com.kaz3t.proto.HelloRestService" />  -->
 
 </beans>
