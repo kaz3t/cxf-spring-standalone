@@ -26,10 +26,16 @@
             <list>
                 <ref bean="helloRestService" />
                 <ref bean="byeRestService" />
+                <ref bean="entryRestService" />
+            </list>
+        </property>
+        <property name="providers">
+            <list>
+                <ref bean="jsonProvider"/>
             </list>
         </property>
     </bean>
 
-<!--     <bean id="helloRestService" class="com.kaz3t.proto.HelloRestService" />  -->
+    <bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
 
 </beans>
