@@ -14,8 +14,7 @@ public class EntryServiceImpl implements EntryService {
     private Map<Long, Entry> entries = new HashMap<>();
     
     @Override
-    public void create(String name, boolean flag, Date datestamp) {
-        Entry entry = new Entry(name, flag, datestamp);
+    public void create(Entry entry) {
         entries.put(entry.getId(), entry);
     }
 

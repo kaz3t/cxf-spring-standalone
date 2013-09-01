@@ -4,9 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -32,8 +35,26 @@ public class EntryRestService {
     }
     
     @POST
-    public void create(String name, boolean flag, Date datestamp) {
-        
+    public void create(Entry entry) {
+        entryService.create(entry);
+    }
+    
+    @GET
+    @Path("/{id}")
+    public Entry get(@PathParam("id") long id) {
+        return entryService.get(id);
+    }
+    
+    @DELETE
+    @Path("/{id}")
+    public void delete(@PathParam("id") long id) {
+        entryService.delete(id);
+    }
+
+    @PUT
+    @Path("/{id}")
+    public void update(Entry entry) {
+        entryService.update(entry);
     }
     
 }
