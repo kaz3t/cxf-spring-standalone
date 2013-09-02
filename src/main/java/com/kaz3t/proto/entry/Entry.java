@@ -1,33 +1,30 @@
 package com.kaz3t.proto.entry;
 
+import java.math.BigInteger;
 import java.util.Date;
 
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection="entries")
 public class Entry {
-
-    private static long seqId = 0;
     
-    private long id;
+    @Id
+    private BigInteger id;
     private String name;
     private boolean flag;
     private Date datestamp;
-    
-    private Entry() {
-        System.out.println("def");
-    }
   
     @JsonCreator
     public Entry(@JsonProperty("name") String name, @JsonProperty("flag") boolean flag) {
-        System.out.println("non def");
-        this.id = seqId++;
         this.name = name;
         this.flag = flag;
         //this.datestamp = new Date(System.currentTimeMillis());
     }
 
-    public long getId() {
+    public BigInteger getId() {
         return id;
     }
     

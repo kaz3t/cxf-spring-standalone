@@ -1,41 +1,40 @@
 package com.kaz3t.proto.entry;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
+import java.math.BigInteger;
 import java.util.List;
-import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EntryServiceImpl implements EntryService {
 
-    private Map<Long, Entry> entries = new HashMap<>();
+    @Autowired(required=true)
+    private EntryRepository entryRepository;
     
     @Override
     public void create(Entry entry) {
-        entries.put(entry.getId(), entry);
+        entryRepository.save(entry);
     }
 
     @Override
-    public void delete(long id) {
-        entries.remove(id);
+    public void delete(BigInteger id) {
+        entryRepository.remove(id);
     }
 
     @Override
     public void update(Entry entry) {
-        entries.put(entry.getId(), entry);
+        entryRepository.save(entry);
     }
 
     @Override
     public List<Entry> all() {
-        return new ArrayList<>(entries.values());
+        return entryRepository.findAll();
     }
 
     @Override
-    public Entry get(long id) {
-        return entries.get(id);
+    public Entry get(BigInteger id) {
+        return entryRepository.findOne(id);
     }
 
 }

@@ -24,9 +24,9 @@
         <property name="address" value="http://localhost:7777" />
         <property name="serviceBeans">
             <list>
-                <ref bean="helloRestService" />
-                <ref bean="byeRestService" />
-                <ref bean="entryRestService" />
+                <ref bean="helloResource" />
+                <ref bean="byeResource" />
+                <ref bean="entryResource" />
             </list>
         </property>
         <property name="providers">
@@ -38,4 +38,13 @@
 
     <bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
 
+    <bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean">
+        <property name="host" value="localhost" />
+    </bean>
+         
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongo" ref="mongo" />
+        <constructor-arg name="databaseName" value="demo" />
+    </bean>
+ 
 </beans>
