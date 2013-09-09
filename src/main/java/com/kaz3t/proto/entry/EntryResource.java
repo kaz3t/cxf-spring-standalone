@@ -33,7 +33,7 @@ public interface EntryResource {
     public void delete(@PathParam("id") BigInteger id);
 
     @PUT
-    @Path("/{id}")
-    public void update(Entry entry);
+    @Path("{id}")
+    public void update(@PathParam("id") BigInteger id, Entry entry);
     
 }

@@ -4,6 +4,8 @@ import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
+import javax.ws.rs.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,24 +19,29 @@ public class EntryResourceImpl implements EntryResource {
         this.entryService = entryService;
     }
     
+    @Override
     public List<Entry> all() {
         return entryService.all();
     }
     
+    @Override
     public void create(Entry entry) {
         entryService.create(entry);
     }
     
+    @Override
     public Entry get(BigInteger id) {
         return entryService.get(id);
     }
     
+    @Override
     public void delete(BigInteger id) {
         entryService.delete(id);
     }
 
-    public void update(Entry entry) {
-        entryService.update(entry);
+    @Override
+    public void update(BigInteger id, Entry entry) {
+        entryService.update(id, entry);
     }
     
 }

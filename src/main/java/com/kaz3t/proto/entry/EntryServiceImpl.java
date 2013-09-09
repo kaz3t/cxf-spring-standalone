@@ -23,8 +23,11 @@ public class EntryServiceImpl implements EntryService {
     }
 
     @Override
-    public void update(Entry entry) {
-        entryRepository.save(entry);
+    public void update(BigInteger id, Entry entry) {
+        Entry savedEntry = entryRepository.findOne(id);
+        savedEntry.setName(entry.getName());
+        savedEntry.setFlag(entry.isFlag());
+        entryRepository.save(savedEntry);
     }
 
     @Override
